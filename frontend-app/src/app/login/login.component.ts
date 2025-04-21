@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; 
-import { RouterLink }   from '@angular/router';
+// src/app/login/login.component.ts
+import { Component }        from '@angular/core';
+import { HttpClient }       from '@angular/common/http';
+import { Router }           from '@angular/router';
+import { CommonModule }     from '@angular/common';
+import { FormsModule }      from '@angular/forms';
+import { RouterLink }       from '@angular/router';
+
 @Component({
   selector: 'app-login',
   standalone: true,
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  imports: [CommonModule, FormsModule,RouterLink] 
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   email: string = '';
@@ -20,28 +22,25 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   login() {
-    const data = {
-      email: this.email,
-      password: this.password
-    };
-
-    this.http.post<any>('http://localhost:8000/api/login.php', data)
-      .subscribe({
-        next: (res) => {
-          if (res.status === 'success') {
-            this.successMessage = res.message;
-            this.errorMessage = '';
-            console.log('User:', res.user);
-            this.router.navigate(['/login']);
+    this.errorMessage = '';
+    this.http.post<any>(
+      'http://localhost:8000/api/login.php', 
+      { email: this.email, password: this.password },
+      { withCredentials: true }
+    ).subscribe({
+      next: res => {
+        if (res.status === 'success') {
+          // route based on role
+          if (res.user.role === 'admin') {
+            this.router.navigate(['/admin']);
           } else {
-            this.errorMessage = res.message;
-            this.successMessage = '';
+            this.router.navigate(['/user']);
           }
-        },
-        error: (err) => {
-          this.errorMessage = 'Server error occurred.';
-          console.error(err);
+        } else {
+          this.errorMessage = res.message;
         }
-      });
+      },
+      error: () => this.errorMessage = 'Server error'
+    });
   }
 }
