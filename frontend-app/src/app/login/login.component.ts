@@ -3,13 +3,13 @@ import { HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [CommonModule, FormsModule] 
+  imports: [CommonModule, FormsModule,RouterModule] 
 })
 export class LoginComponent {
   email: string = '';
