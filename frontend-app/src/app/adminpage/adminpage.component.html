@@ -1,11 +1,7 @@
 <div class="container">
-  <h1>Welcome, {{ name }} (Admin)</h1>
-  <h3>All User Messages:</h3>
-  <ul>
-    <li *ngFor="let m of messages">
-      <strong>{{ m.user_name }}:</strong> {{ m.content }}
-      <small>({{ m.created_at }})</small>
-    </li>
-  </ul>
+  <!-- Greet by name and role: -->
+  <h1>Hello {{ name }}, this is an admin page</h1>
+
+
   <button (click)="logout()">Logout</button>
 </div>
