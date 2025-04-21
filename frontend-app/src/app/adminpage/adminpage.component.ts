@@ -8,7 +8,7 @@ import { RouterLink }            from '@angular/router';
 @Component({
   selector: 'app-admin-page',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './adminpage.component.html',
   styleUrls: ['./adminpage.component.css']
 })
