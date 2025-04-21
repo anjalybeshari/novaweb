@@ -103,7 +103,7 @@ p a:hover {
 
 /* Optional: hide inactive forms if toggling between login/register */
 .form-box {
-    display: none;
+  
 }
 
 .form-box.active {
