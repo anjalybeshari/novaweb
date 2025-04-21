@@ -32,7 +32,7 @@ export class LoginComponent {
             this.successMessage = res.message;
             this.errorMessage = '';
             console.log('User:', res.user);
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/login']);
           } else {
             this.errorMessage = res.message;
             this.successMessage = '';
