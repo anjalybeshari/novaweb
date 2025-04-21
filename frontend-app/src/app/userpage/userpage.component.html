@@ -1,10 +1,5 @@
+<!-- src/app/user-page/user-page.component.html -->
 <div class="container">
-  <h1>Welcome, {{ name }}</h1>
-  <h3>Your Messages:</h3>
-  <ul>
-    <li *ngFor="let m of messages">
-      {{ m.content }} <small>({{ m.created_at }})</small>
-    </li>
-  </ul>
+  <h1>Hello {{ name }}, this is a user account</h1>
   <button (click)="logout()">Logout</button>
 </div>
