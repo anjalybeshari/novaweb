@@ -1,0 +1,42 @@
+/* navbar.component.css */
+
+/* Container */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;   /* center the links */
+    background-color: #17a2b8; /* same as Bootstrap’s bg-info */
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  /* Links */
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 0.75rem;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+  
+  /* Remove extra margin on the last link */
+  nav a:last-child {
+    margin-right: 0;
+  }
+  
+  /* Hover/focus styles */
+  nav a:hover,
+  nav a:focus {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+  
+  /* Responsive wrapping on small screens */
+  @media (max-width: 600px) {
+    nav {
+      flex-wrap: wrap;
+    }
+    nav a {
+      margin: 0.5rem;
+    }
+}  

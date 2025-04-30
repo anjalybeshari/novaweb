@@ -1,0 +1,10 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <form (ngSubmit)="submit()">
+    <input [(ngModel)]="query" name="q" placeholder="Search products">
+    <button type="submit">Search</button>
+  </form>
+  <div class="results">
+    <div *ngFor="let p of results">{{ p.product_title }} — {{ p.product_price }}</div>
+  </div>
+</div>

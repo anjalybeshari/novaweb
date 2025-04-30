@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
-* {
+ *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -102,7 +102,7 @@ p a:hover {
 }
 
 /* Optional: hide inactive forms if toggling between login/register */
-.form-box {
+/* .form-box {
   
 }
 
@@ -127,4 +127,28 @@ p a:hover {
 .status-message.error {
     background-color: #f8d7da;
     color: #721c24;
-}
+}  */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    overflow-x: hidden;
+  }
+  .logo {
+    width: 7%;
+    height: 7%;
+  }
+  .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+  }
+  .cart_img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+  

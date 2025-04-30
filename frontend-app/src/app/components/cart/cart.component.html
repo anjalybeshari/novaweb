@@ -1,0 +1,11 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Your Cart</h2>
+  <ul>
+    <li *ngFor="let it of items">
+      {{ it.product_title }} — {{ it.quantity }} × {{ it.product_price }}
+      <button (click)="remove(it.product_id)">Remove</button>
+    </li>
+  </ul>
+  <p>Total: {{ total }} /-</p>
+</div>

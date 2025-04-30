@@ -1,0 +1,10 @@
+<app-navbar></app-navbar>
+<div class="products-grid">
+  <div *ngFor="let p of products" class="card">
+    <img [src]="p.product_image1" alt="{{p.product_title}}">
+    <h4>{{ p.product_title }}</h4>
+    <p>{{ p.product_description }}</p>
+    <p>Price: {{ p.product_price }} /-</p>
+    <!-- <button (click)="addToCart(p)">Add to Cart</button> -->
+  </div>
+</div>
