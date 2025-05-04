@@ -1,5 +1,4 @@
 
-/* Navbar container */
 nav.navbar {
   display: flex;
   justify-content: space-between;
@@ -11,14 +10,13 @@ nav.navbar {
   flex-wrap: wrap;
 }
 
-/* Group logo and left links */
 .nav-main {
   display: flex;
   align-items: center;
-  gap: 5rem; /* space between logo and links */
+  gap: 5rem; 
 }
 
-/* Logo style */
+
 .logo {
   font-family: 'Dancing Script', cursive;
   font-weight: 600;
@@ -29,14 +27,14 @@ nav.navbar {
   text-decoration: none;
 }
 
-/* Left and right nav link groups */
+
 .nav-left,
 .nav-right {
   display: flex;
   align-items: center;
 }
 
-/* Common nav links */
+
 .navbar a {
   color: white;
   text-decoration: none;
@@ -47,28 +45,28 @@ nav.navbar {
   font-family: 'Albert Sans', sans-serif;
 }
 
-/* Hover/focus effect */
+
 .navbar a:hover,
 .navbar a:focus {
   color: #cccccc;
   transform: translateY(-1px);
 }
-/* Cart icon style */
+
 .navbar .material-icons {
-  font-size: 2rem; /* Adjust the size */
-  color: white; /* Icon color */
-  vertical-align: middle; /* Align icon vertically */
+  font-size: 2rem; 
+  color: white; 
+  vertical-align: middle; 
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-/* Hover/focus effect on the icon */
+
 .navbar a:hover .material-icons,
 .navbar a:focus .material-icons {
   color: #cccccc;
   transform: translateY(-1px);
 }
 
-/* Responsive layout */
+
 @media (max-width: 768px) {
   nav.navbar {
     flex-direction: column;
