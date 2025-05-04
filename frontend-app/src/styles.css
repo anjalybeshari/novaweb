@@ -128,6 +128,8 @@ p a:hover {
     background-color: #f8d7da;
     color: #721c24;
 }  */
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Dancing+Script:wght@400..700&display=swap');
+
 
 * {
     margin: 0;
@@ -151,4 +153,5 @@ p a:hover {
     height: 80px;
     object-fit: contain;
   }
+
   

@@ -1,42 +1,93 @@
-/* navbar.component.css */
 
-/* Container */
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;   /* center the links */
-    background-color: #17a2b8; /* same as Bootstrap’s bg-info */
-    padding: 0.75rem 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Navbar container */
+nav.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1c1c1c;
+  padding: 1rem 2rem;
+  font-family: 'Albert Sans', sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap;
+}
+
+/* Group logo and left links */
+.nav-main {
+  display: flex;
+  align-items: center;
+  gap: 5rem; /* space between logo and links */
+}
+
+/* Logo style */
+.logo {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 600;
+  font-size: 2rem;
+  color: white;
+  white-space: nowrap;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  text-decoration: none;
+}
+
+/* Left and right nav link groups */
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Common nav links */
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 0.75rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  font-family: 'Albert Sans', sans-serif;
+}
+
+/* Hover/focus effect */
+.navbar a:hover,
+.navbar a:focus {
+  color: #cccccc;
+  transform: translateY(-1px);
+}
+/* Cart icon style */
+.navbar .material-icons {
+  font-size: 2rem; /* Adjust the size */
+  color: white; /* Icon color */
+  vertical-align: middle; /* Align icon vertically */
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover/focus effect on the icon */
+.navbar a:hover .material-icons,
+.navbar a:focus .material-icons {
+  color: #cccccc;
+  transform: translateY(-1px);
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  nav.navbar {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
-  /* Links */
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 0.75rem;
-    font-weight: 500;
-    transition: opacity 0.2s;
+
+  .nav-main,
+  .nav-right {
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0.5rem 0;
   }
-  
-  /* Remove extra margin on the last link */
-  nav a:last-child {
-    margin-right: 0;
+
+  .nav-left,
+  .nav-right {
+    justify-content: center;
   }
-  
-  /* Hover/focus styles */
-  nav a:hover,
-  nav a:focus {
-    opacity: 0.8;
-    text-decoration: underline;
+
+  .navbar a {
+    margin: 0.5rem 1rem;
   }
-  
-  /* Responsive wrapping on small screens */
-  @media (max-width: 600px) {
-    nav {
-      flex-wrap: wrap;
-    }
-    nav a {
-      margin: 0.5rem;
-    }
-}  
+}

@@ -1,10 +1,17 @@
-<nav class="navbar bg-info">
-    <a routerLink="/">Home</a>
-    <a routerLink="/products">New Collection</a>
-    <a routerLink="/cart">Cart</a>
-    <a routerLink="/search">Search</a>
-    <a routerLink="/login">Log in</a>
+<nav class="navbar">
+  <div class="nav-main">
+    <div class="logo">Nova</div>
+    <div class="nav-left">
+      <a routerLink="/">Home</a>
+      <a routerLink="/collection">New Collection</a>
+      <a routerLink="/search">Search</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <a routerLink="/cart">
+      <span class="material-icons">shopping_cart</span>
+    </a>
+    <a routerLink="/login">Log In</a>
     <a routerLink="/register">Register</a>
-
-  </nav>
-  
+  </div>
+</nav>
