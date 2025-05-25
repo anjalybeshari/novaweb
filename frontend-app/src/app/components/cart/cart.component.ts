@@ -1,37 +1,36 @@
-// src/app/components/cart/cart.component.ts
-import { Component, OnInit }    from '@angular/core';
-import { CommonModule }          from '@angular/common';
-import { ApiService }            from '../../services/api.service';
-import { NavbarComponent }       from '../navbar/navbar.component';  // ← import it
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [
-    CommonModule,
-    NavbarComponent               // ← add it here
-  ],
+  imports: [CommonModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  items: any[] = [];
-  total = 0;
+  cartItems: any[] = [];
+  itemCount: number = 0;
+  totalPrice: number = 0;
 
-  constructor(private api: ApiService) {}
+  constructor(private http: HttpClient) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadCart();
+    this.loadSummary();
   }
 
-  loadCart() {
-    this.api.getCart().subscribe(res => {
-      this.items = res.items;
-      this.total = res.total;
-    });
+  loadCart(): void {
+    this.http.get<any[]>('http://localhost:8000/api/cart.php', { withCredentials: true })
+      .subscribe(res => this.cartItems = res);
   }
 
-  remove(pid: number) {
-    this.api.removeFromCart(pid).subscribe(() => this.loadCart());
+  loadSummary(): void {
+    this.http.get<any>('http://localhost:8000/api/cart_summary.php', { withCredentials: true })
+      .subscribe(summary => {
+        this.itemCount = summary.itemCount;
+        this.totalPrice = summary.totalPrice;
+      });
   }
 }
