@@ -1,20 +1,20 @@
-
+// products.component.ts
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule }      from '@angular/common';
+import { RouterModule }      from '@angular/router';
 import { NavbarComponent }   from '../navbar/navbar.component';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { ApiService } from '../../services/api.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { ApiService }        from '../../services/api.service';
+import { ActivatedRoute }    from '@angular/router';
 
 @Component({
   selector: 'app-products',
+  standalone: true,
+  imports: [ CommonModule, RouterModule ],
   templateUrl: './products.component.html',
-  imports:[NavbarComponent,CommonModule, HttpClientModule,RouterModule],
-   
+  styleUrls:   ['./products.component.css']    // ← point to your new CSS
 })
 export class ProductsComponent implements OnInit {
-  products:any[]=[];
+  @Input() products: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -23,13 +23,9 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.api.getProducts(id).subscribe({
-      next: (data) => {
-        this.products = data;
-      },
-      error: (err) => {
-        console.error('Failed to load product', err);
-      }
+    this.api.getProducts(id || undefined).subscribe({
+      next: data => this.products = data,
+      error: err => console.error('Failed to load product', err)
     });
   }
 }

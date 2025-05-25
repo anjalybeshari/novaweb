@@ -1,15 +1,28 @@
-<app-navbar></app-navbar>
+
 <div class="container mt-4">
-  <div class="row">
-    <div *ngFor="let p of products" class="col-md-4 mb-4">
-      <div class="card h-100">
-        <img [src]="'/assets/product_images/' + p.product_image1" class="card-img-top" [alt]="p.product_title">
-        <div class="card-body">
-          <h5 class="card-title">{{ p.product_title }}</h5>
-          <p class="card-text">{{ p.product_description }}</p>
-          <p class="card-text"><strong>Price:</strong> {{ p.product_price }} /-</p>
-          <a class="btn btn-info" [routerLink]="['/cart']" [queryParams]="{ add: p.product_id }">Add to Cart</a>
-          <a class="btn btn-secondary ms-2" [routerLink]="['/products', p.product_id]">View More</a>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    <div *ngFor="let p of products" class="col-4 mb-4">
+      <div class="product-card">
+        <img [src]="'/assets/img/' + p.product_image"
+             alt="{{ p.product_title }}"
+             class="product-img">
+
+        <div class="product-body">
+          <h5 class="product-title">{{ p.product_title }}</h5>
+          <p class="product-subtitle">Step into Comfort and Style Today</p>
+          <p class="product-price">Price: {{ p.product_price }} /-</p>
+
+          <div class="btn-group">
+            <a [routerLink]="['/cart']"
+               [queryParams]="{ add: p.product_id }"
+               class="btn btn-cart">
+              Add to cart
+            </a>
+            <a [routerLink]="['/products', p.product_id]"
+               class="btn btn-more">
+              View more
+            </a>
+          </div>
         </div>
       </div>
     </div>
