@@ -1,7 +1,43 @@
 <div class="container">
-  <!-- Greet by name and role: -->
-  <h1>Hello {{ name }}, this is an admin page</h1>
+  <h2>Hello, {{ name }}!</h2>
 
+  <nav class="nav-buttons">
+    <button (click)="selectSection('users')">Manage Users</button>
+    <button (click)="selectSection('products')">Manage Products</button>
+    <button (click)="selectSection('stats')">Statistics</button>
+    <button (click)="logout()">Logout</button>
+  </nav>
 
-  <button (click)="logout()">Logout</button>
+  <!-- Manage Users -->
+  <div *ngIf="selectedSection === 'users'" class="section">
+    <h3>Users</h3>
+    <table class="user-table">
+      <tr><th>Name</th><th>Email</th><th>Role</th></tr>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Manage Products -->
+  <div *ngIf="selectedSection === 'products'" class="section">
+    <h3>Products</h3>
+    <div *ngFor="let product of products" class="product-card">
+      <img [src]="'http://localhost:8000/images/' + product.product_image1" width="100">
+      <h4>{{ product.product_title }}</h4>
+      <p>Price: ${{ product.product_price }}</p>
+    </div>
+  </div>
+
+  <!-- Statistics -->
+  <div *ngIf="selectedSection === 'stats'" class="section">
+    <h3>Statistics</h3>
+    <ul>
+      <li>Total Users: {{ users.length }}</li>
+      <li>Total Products: {{ products.length }}</li>
+      <li>Total Messages: {{ messages.length }}</li>
+    </ul>
+  </div>
 </div>

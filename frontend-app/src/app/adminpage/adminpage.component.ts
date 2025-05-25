@@ -1,9 +1,8 @@
-// src/app/admin-page/admin-page.component.ts
-import { Component, OnInit }     from '@angular/core';
-import { HttpClient }            from '@angular/common/http';
-import { Router }                from '@angular/router';
-import { CommonModule }          from '@angular/common';
-import { RouterLink }            from '@angular/router';
+// src/app/admin-page/adminpage.component.ts
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-page',
@@ -14,34 +13,66 @@ import { RouterLink }            from '@angular/router';
 })
 export class AdminPageComponent implements OnInit {
   name = '';
-  messages: { user_name:string; content:string; created_at:string }[] = [];
+  selectedSection: string = 'users';
+
+  messages: { user_name: string; content: string; created_at: string }[] = [];
+  users: any[] = [];
+  products: any[] = [];
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-    // verify admin
+    // Verifiko që përdoruesi është admin
     this.http.get<any>(
-      'http://localhost:8000/api/get_user.php',
+      'http://localhost:8000/api/getuser.php',
       { withCredentials: true }
     ).subscribe({
       next: res => {
-        if (res.status==='success' && res.user.role==='admin') {
+        if (res.status === 'success' && res.user.role === 'admin') {
           this.name = res.user.name;
         } else {
           this.router.navigate(['/login']);
         }
+      },
+      error: () => {
+        this.router.navigate(['/login']);
       }
     });
 
-    // fetch all messages
+    // Merr mesazhet
     this.http.get<any>(
-      'http://localhost:8000/api/get_all_messages.php',
+      'http://localhost:8000/api/getallmessages.php',
       { withCredentials: true }
     ).subscribe(res => {
       if (res.status === 'success') {
         this.messages = res.messages;
       }
     });
+
+    // Merr produktet nga databaza
+    this.http.get<any>(
+      'http://localhost:8000/api/get_products.php',
+      { withCredentials: true }
+    ).subscribe(res => {
+      if (res.status === 'success') {
+        this.products = res.products;
+      }
+    });
+
+    // Merr përdoruesit nga databaza
+this.http.get<any>(
+  'http://localhost:8000/api/get_all_users.php',
+  { withCredentials: true }
+).subscribe(res => {
+  if (res.status === 'success') {
+    this.users = res.users;
+  }
+});
+
+  }
+
+  selectSection(section: string) {
+    this.selectedSection = section;
   }
 
   logout() {
