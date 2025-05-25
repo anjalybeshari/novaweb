@@ -1,52 +1,36 @@
-// src/app/cart/cart.component.ts
 import { Component, OnInit } from '@angular/core';
-import { CartService, CartItem } from '../../services/cart.service';
-
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cart: CartItem[] = [];
-  quantities: { [id: number]: number } = {};
-  toRemove: Set<number> = new Set();
+  cartItems: any[] = [];
+  itemCount: number = 0;
+  totalPrice: number = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(private http: HttpClient) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadCart();
+    this.loadSummary();
   }
 
-  loadCart() {
-    this.cartService.getCart().subscribe(items => {
-      this.cart = items;
-      this.quantities = {};
-      items.forEach(i => this.quantities[i.product_id] = i.quantity);
-    });
+  loadCart(): void {
+    this.http.get<any[]>('http://localhost:8000/api/cart.php', { withCredentials: true })
+      .subscribe(res => this.cartItems = res);
   }
 
-  updateCart() {
-    this.cartService.updateCart(this.quantities).subscribe(() => this.loadCart());
-  }
-
-  removeSelected() {
-    this.cartService.removeItems(Array.from(this.toRemove)).subscribe(() => {
-      this.toRemove.clear();
-      this.loadCart();
-    });
-  }
-
-  toggleRemove(id: number, checked: boolean) {
-    checked ? this.toRemove.add(id) : this.toRemove.delete(id);
-  }
-
-  getSubtotal(item: CartItem) {
-    return item.product_price * this.quantities[item.product_id];
-  }
-
-  getTotal() {
-    return this.cart.reduce((sum, i) => sum + i.product_price * this.quantities[i.product_id], 0);
+  loadSummary(): void {
+    this.http.get<any>('http://localhost:8000/api/cart_summary.php', { withCredentials: true })
+      .subscribe(summary => {
+        this.itemCount = summary.itemCount;
+        this.totalPrice = summary.totalPrice;
+      });
   }
 }
