@@ -1,11 +1,39 @@
-<app-navbar></app-navbar>
-<div class="container">
-  <h2>Your Cart</h2>
-  <ul>
-    <li *ngFor="let it of items">
-      {{ it.product_title }} — {{ it.quantity }} × {{ it.product_price }}
-      <button (click)="remove(it.product_id)">Remove</button>
-    </li>
-  </ul>
-  <p>Total: {{ total }} /-</p>
+<!-- src/app/cart/cart.component.html -->
+<div *ngIf="cart.length; else empty">
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th>Title</th><th>Image</th><th>Qty</th><th>Total</th><th>Remove</th>
+      </tr>
+    </thead>
+    <!-- <tbody>
+      <tr *ngFor="let item of cart">
+        <td>{{ item.product_title }}</td>
+        <td><img [src]="'http://localhost/novaweb-final/admin_area/product_images/'+item.product_image1"
+                 class="cart_img" /></td>
+        <td>
+          <input type="number"
+                 [(ngModel)]="quantities[item.product_id]"
+                 class="form-control w-50">
+        </td>
+        <td>{{ getSubtotal(item) }}/-</td>
+        <td>
+          <input type="checkbox"
+                 (change)="toggleRemove(item.product_id, $event.target.checked)">
+        </td>
+      </tr>
+    </tbody> -->
+  </table>
+
+  <div class="d-flex align-items-center">
+    <h4>Subtotal: <strong>{{ getTotal() }}/-</strong></h4>
+    <button (click)="updateCart()" class="btn btn-info mx-3">Update Cart</button>
+    <button (click)="removeSelected()" class="btn btn-danger">Remove Selected</button>
+    <a routerLink="/checkout" class="btn btn-secondary ms-auto">Checkout</a>
+  </div>
 </div>
+
+<ng-template #empty>
+  <h2 class="text-center text-danger">Cart is empty</h2>
+  <a routerLink="/" class="btn btn-info">Continue Shopping</a>
+</ng-template>
