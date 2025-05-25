@@ -48,7 +48,17 @@ nav.navbar {
   transition: color 0.2s ease, transform 0.2s ease;
   font-family: 'Albert Sans', sans-serif;
 }
-
+.word{
+  
+  color: white;
+  text-decoration: none;
+  margin: 0 0.75rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  font-family: 'Albert Sans', sans-serif;
+  cursor: pointer;
+}
 
 .navbar a:hover,
 .navbar a:focus {
@@ -93,3 +103,28 @@ nav.navbar {
     margin: 0.5rem 1rem;
   }
 }
+
+
+/* Search bar styling */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.search-bar .search-icon {
+  font-size: 20px;
+  margin-right: 6px;
+  color: gray;
+}
+
+.search-bar input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  width: 160px;
+}
+
