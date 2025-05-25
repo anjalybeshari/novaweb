@@ -1,24 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService }        from '../../services/api.service';
+
 import { CommonModule }      from '@angular/common';
 import { NavbarComponent }   from '../navbar/navbar.component';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ApiService } from '../../services/api.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-products',
-  standalone: true,
-  imports: [CommonModule, NavbarComponent],
-  templateUrl: './products.component.html'
+  templateUrl: './products.component.html',
+  imports:[NavbarComponent,CommonModule, HttpClientModule,RouterModule],
+   
 })
 export class ProductsComponent implements OnInit {
-  products: any[] = [];
+  products:any[]=[];
 
-  constructor(private api: ApiService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private api: ApiService
+  ) {}
 
-  ngOnInit() {
-    this.api.getProducts().subscribe(data => this.products = data);
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.api.getProducts(id).subscribe({
+      next: (data) => {
+        this.products = data;
+      },
+      error: (err) => {
+        console.error('Failed to load product', err);
+      }
+    });
   }
-
-  // addToCart(p: any) {
-  //   this.api.addToCart(p.product_id, 1).subscribe();
-  // }
 }
