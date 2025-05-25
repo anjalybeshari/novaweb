@@ -3,27 +3,14 @@ header("Access-Control-Allow-Origin: http://localhost:4200");
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");
 
-session_start();
-require_once '../config/config.php';
+require_once __DIR__ . '/../config/config.php';
 
-$sql = "SELECT product_id, product_title, product_price, product_image1 FROM products";
-$result = $conn->query($sql);
+$sql = "SELECT * FROM products WHERE status = true";
+$res = $conn->query($sql);
 
-if ($result && $result->num_rows > 0) {
-    $products = [];
-    while ($row = $result->fetch_assoc()) {
-        $products[] = $row;
-    }
-
-    echo json_encode([
-        "status" => "success",
-        "products" => $products
-    ]);
-} else {
-    echo json_encode([
-        "status" => "error",
-        "message" => "No products found"
-    ]);
+$products = [];
+while ($row = $res->fetch_assoc()) {
+    $products[] = $row;
 }
 
-$conn->close();
+echo json_encode($products);

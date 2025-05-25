@@ -1,7 +1,7 @@
 <?php
 // api/cart.php
 header('Content-Type: application/json');
-include '../includes/connect.php';
+require_once __DIR__ . '/../config/config.php'; 
 include '../functions/common_function.php';
 session_start();
 
@@ -15,7 +15,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
   case 'GET':
     // fetch cart
     $stmt = $con->prepare("
-      SELECT c.product_id, p.product_price, p.product_title, p.product_image1, c.quantity
+      SELECT c.product_id, p.product_price, p.product_title, p.product_image, c.quantity
       FROM cart_details c
       JOIN products p ON c.product_id = p.product_id
       WHERE c.ip_address = ?
@@ -57,8 +57,35 @@ switch ($_SERVER['REQUEST_METHOD']) {
     }
     echo json_encode(['status'=>'ok']);
     break;
+
+     case 'POST':
+    $product_id = $body['product_id'] ?? null;
+    $quantity   = $body['quantity'] ?? 1;
+
+    if (!$product_id) {
+      http_response_code(400);
+      echo json_encode(['error' => 'Missing product_id']);
+      exit;
+    }
+
+    require_once __DIR__ . '/../functions/common_function.php';
+    $ok = add_to_cart((int)$product_id, (int)$quantity);
+
+    echo json_encode(['status' => $ok ? 'added' : 'failed']);
+    break;
   
   default:
     http_response_code(405);
     echo json_encode(['error'=>'Method not allowed']);
+}
+header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Content-Type: application/json");
+
+// Për OPTIONS request (preflight)
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
 }

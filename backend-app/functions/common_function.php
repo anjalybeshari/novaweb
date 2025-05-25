@@ -4,6 +4,11 @@
 /**
  * Get the client’s IP address (used to key the cart).
  */
+
+global $con;
+require_once __DIR__ . '/../config/config.php';
+
+
 function getIPAddress(): string {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         return $_SERVER['HTTP_CLIENT_IP'];
@@ -162,4 +167,6 @@ function cart_item_list(): array {
     $stmt->close();
 
     return $items;
+
+    echo cart_item_count(); // do duhet të kthejë një numër
 }

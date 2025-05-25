@@ -115,96 +115,28 @@
   </div>
 </section>
 
-<!--==================== Te preferuarat ====================-->
+
+<!--==================== Të preferuarat ====================-->
 <section class="favorite section" id="favorite">
-  <h2 class="section__title">Te preferuarat</h2>
+  <h2 class="section__title">Të preferuarat</h2>
 
   <div class="favorite__container container grid">
-     <article class="favorite__card">
-        <img src="../../../assets/img/te pref 1.png" alt="image" class="favorite__img">
+    <article class="favorite__card" *ngFor="let p of favorites">
+      <img [src]="'../../../assets/img/' + p.image" [alt]="p.title" class="favorite__img">
 
-        <div class="favorite__data">
-           <h2 class="favorite__title">Princess Necklace</h2>
-           <span class="favorite__subtitle">Varese</span>
-           <h3 class="favorite__price">€19 990</h3>
-        </div>
+      <div class="favorite__data">
+        <h2 class="favorite__title">{{ p.title }}</h2>
+        <span class="favorite__subtitle">{{ p.subtitle }}</span>
+        <h3 class="favorite__price">€{{ p.price }}</h3>
+      </div>
 
-        <button class="favorite__button button">
-           <i class="ri-add-line"></i>
-        </button>
-     </article>
-
-     <article class="favorite__card">
-        <img src="../../../assets/img/te pref 3.png" alt="image" class="favorite__img">
-
-        <div class="favorite__data">
-           <h2 class="favorite__title">Tennis Bracelet</h2>
-           <span class="favorite__subtitle">Byzylyk</span>
-           <h3 class="favorite__price">€10 990</h3>
-        </div>
-
-        <button class="favorite__button button">
-           <i class="ri-add-line"></i>
-        </button>
-     </article>
-
-     <article class="favorite__card">
-        <img src="assets/img/te pref 5.png" alt="image" class="favorite__img">
-
-        <div class="favorite__data">
-           <h2 class="favorite__title">Wedding Ring</h2>
-           <span class="favorite__subtitle">Unaze</span>
-           <h3 class="favorite__price">€10 000</h3>
-        </div>
-
-        <button class="favorite__button button">
-           <i class="ri-add-line"></i>
-        </button>
-     </article>
-
-     <article class="favorite__card">
-        <img src="../../../assets/img/te pref 2.png" alt="image" class="favorite__img">
-
-        <div class="favorite__data">
-           <h2 class="favorite__title">TearDrop Necklace</h2>
-           <span class="favorite__subtitle">Varese</span>
-           <h3 class="favorite__price">€12 990</h3>
-        </div>
-
-        <button class="favorite__button button">
-           <i class="ri-add-line"></i>
-        </button>
-     </article>
-
-     <article class="favorite__card">
-        <img src="../../../assets/img/te pref 4.png" alt="image" class="favorite__img">
-
-        <div class="favorite__data">
-           <h2 class="favorite__title">SnowFlake  Earrings</h2>
-           <span class="favorite__subtitle">Vathe</span>
-           <h3 class="favorite__price">€8 000</h3>
-        </div>
-
-        <button class="favorite__button button">
-           <i class="ri-add-line"></i>
-        </button>
-     </article>
-
-     <article class="favorite__card">
-        <img src="assets/img/te pref 6.png" alt="image" class="favorite__img">
-
-        <div class="favorite__data">
-           <h2 class="favorite__title">TearDrop Ring</h2>
-           <span class="favorite__subtitle">Unaze</span>
-           <h3 class="favorite__price">€11 500</h3>
-        </div>
-
-        <button class="favorite__button button">
-           <i class="ri-add-line"></i>
-        </button>
-     </article>
+      <button class="favorite__button button" (click)="addToCart(p.product_id)">
+        <i class="ri-add-line"></i>
+      </button>
+    </article>
   </div>
 </section>
+
 
 <!--====================   Na vizitoni ====================-->
 <section class="visit section" id="visit">

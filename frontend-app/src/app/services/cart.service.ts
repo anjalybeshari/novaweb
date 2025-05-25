@@ -13,9 +13,17 @@ export interface CartItem {
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private apiUrl = 'http://localhost/novaweb-final/backend-app/api/cart.php';
+  private apiUrl = 'http://localhost:8000/api/cart.php'; 
 
   constructor(private http: HttpClient) {}
+
+  addToCart(productId: number, quantity = 1): Observable<any> {
+  return this.http.post(
+    this.apiUrl,
+    { product_id: productId, quantity },
+    { withCredentials: true }
+  );
+}
 
   getCart(): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(this.apiUrl);
