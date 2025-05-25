@@ -1,7 +1,7 @@
 
 import { CommonModule }      from '@angular/common';
 import { NavbarComponent }   from '../navbar/navbar.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,7 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
    
 })
 export class ProductsComponent implements OnInit {
-  products:any[]=[];
+  @Input() products: any;
+
 
   constructor(
     private route: ActivatedRoute,

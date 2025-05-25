@@ -9,11 +9,13 @@ import { HomeComponent }             from './components/home/home.component';
 import { ProductsComponent }         from './components/products/products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { SearchComponent } from './components/search/search.component';
+import { DisplayAllComponent } from './components/display-all/display-all.component';
 
 export const routes: Routes = [
   // { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
+  { path: 'display-all', component: DisplayAllComponent },
   { path: 'cart',     component: CartComponent },
   { path: 'search',   component: SearchComponent },
   { path: 'login', component: LoginComponent },
