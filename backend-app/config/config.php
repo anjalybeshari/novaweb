@@ -1,8 +1,8 @@
 <?php
 
-$host = "192.168.1.210";
-$user = "olta";
-$password = "olta_pw";
+$host = "localhost";
+$user = "root";
+$password = "Anja21/05/18";
 $database = "NOVA";
 $port = 3306;
 

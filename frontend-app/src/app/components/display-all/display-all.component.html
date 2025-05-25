@@ -4,12 +4,12 @@
   <div class="row">
     <!-- Sidebar -->
     <div class="col-md-2 bg-secondary p-3 text-white">
-      <h5 class="text-light text-center">Brands</h5>
-      <ul class="list-group mb-4">
+      <!-- <h5 class="text-light text-center">Brands</h5> -->
+      <!-- <ul class="list-group mb-4">
         <li *ngFor="let brand of brands" class="list-group-item bg-transparent border-0 text-light p-1">
           <a href="#" class="text-light text-decoration-none">{{ brand.name }}</a>
         </li>
-      </ul>
+      </ul> -->
 
       <h5 class="text-light text-center">Categories</h5>
       <ul class="list-group">
@@ -22,9 +22,9 @@
     <!-- Product Cards -->
     <div class="col-md-10">
       <div class="row">
-        <div *ngFor="let p of products" class="col-md-4 mb-4">
-          <app-products [products]="p"></app-products>
-        </div>
+
+         <app-products [products]="products"></app-products>
+        
       </div>
     </div>
   </div>
