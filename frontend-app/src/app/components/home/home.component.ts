@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 
@@ -9,4 +9,14 @@ import { NavbarComponent } from '../navbar/navbar.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  userName: string = '';
+
+  ngOnInit(): void {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      this.userName = user.name;
+    }
+  }
+}

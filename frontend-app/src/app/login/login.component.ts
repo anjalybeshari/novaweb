@@ -1,10 +1,10 @@
 // src/app/login/login.component.ts
-import { Component }        from '@angular/core';
-import { HttpClient }       from '@angular/common/http';
-import { Router }           from '@angular/router';
-import { CommonModule }     from '@angular/common';
-import { FormsModule }      from '@angular/forms';
-import { RouterLink }       from '@angular/router';
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,24 +23,33 @@ export class LoginComponent {
 
   login() {
     this.errorMessage = '';
+
     this.http.post<any>(
-      'http://localhost:8000/api/login.php', 
+      'http://localhost:8000/api/login.php',
       { email: this.email, password: this.password },
       { withCredentials: true }
     ).subscribe({
       next: res => {
         if (res.status === 'success') {
-          // route based on role
+          // Ruaj në localStorage
+          localStorage.setItem('user', JSON.stringify(res.user));
+          console.log('User role:', res.user.role); // debug
+
+          // Ridrejto sipas rolit
           if (res.user.role === 'admin') {
             this.router.navigate(['/admin']);
           } else {
-            this.router.navigate(['/user']);
+            console.log('Navigating to /home');
+            this.router.navigate(['/home']);
           }
         } else {
-          this.errorMessage = res.message;
+          this.errorMessage = res.message || 'Login failed';
         }
       },
-      error: () => this.errorMessage = 'Server error'
+      error: err => {
+        console.error('Server error:', err);
+        this.errorMessage = 'Server error';
+      }
     });
   }
 }

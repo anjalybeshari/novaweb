@@ -30,18 +30,25 @@ $result = $conn->query("SELECT * FROM User WHERE email = '$email'");
 if ($result && $result->num_rows === 1) {
     $user = $result->fetch_assoc();
 
-    if (password_verify($password, $user['password'])) {
-        echo json_encode([
-            "status" => "success",
-            "message" => "Login successful",
-            "user" => [
-                "id" => $user["id"],
-                "name" => $user["name"],
-                "email" => $user["email"],
-                "role" => $user["role"]
-            ]
-        ]);
-    } else {
+if (password_verify($password, $user['password'])) {
+    //Krijo sesion për përdoruesin e loguar
+    $_SESSION['id']    = $user['id'];
+    $_SESSION['name']  = $user['name'];
+    $_SESSION['email'] = $user['email'];
+    $_SESSION['role']  = $user['role'];
+
+    echo json_encode([
+        "status" => "success",
+        "message" => "Login successful",
+        "user" => [
+            "id" => $user["id"],
+            "name" => $user["name"],
+            "email" => $user["email"],
+            "role" => $user["role"]
+        ]
+    ]);
+
+}else {
         echo json_encode(["status" => "error", "message" => "Incorrect password"]);
     }
 } else {
