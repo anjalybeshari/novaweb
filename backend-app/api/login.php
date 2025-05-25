@@ -22,10 +22,10 @@ if (!$data || !isset($data->email) || !isset($data->password)) {
     exit;
 }
 
-$email = $conn->real_escape_string($data->email);
+$email = $con->real_escape_string($data->email);
 $password = $data->password;
 
-$result = $conn->query("SELECT * FROM User WHERE email = '$email'");
+$result = $con->query("SELECT * FROM User WHERE email = '$email'");
 
 if ($result && $result->num_rows === 1) {
     $user = $result->fetch_assoc();
@@ -55,5 +55,5 @@ if (password_verify($password, $user['password'])) {
     echo json_encode(["status" => "error", "message" => "User not found"]);
 }
 
-$conn->close();
+$con->close();
 ?>
