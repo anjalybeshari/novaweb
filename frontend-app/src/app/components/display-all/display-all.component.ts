@@ -4,11 +4,12 @@ import { ProductsComponent } from '../products/products.component';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-display-all',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, ProductsComponent],
+  imports: [NavbarComponent, CommonModule, ProductsComponent,RouterModule],
   templateUrl: './display-all.component.html',
   styleUrls: ['./display-all.component.css']
 })
@@ -20,6 +21,7 @@ export class DisplayAllComponent implements OnInit {
   constructor(private api: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    // Edhe nëse nuk shfaq më sidebar, e ruaj për përdorim të brendshëm (opsional)
     this.api.getCategories().subscribe(c => this.categories = c);
     this.api.getBrands().subscribe(b => this.brands = b);
 

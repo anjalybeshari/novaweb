@@ -15,7 +15,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 }
 
 $query = "SELECT id, name, email, role FROM User";
-$result = $conn->query($query);
+$result = $con->query($query);
 
 if ($result && $result->num_rows > 0) {
   $users = [];
@@ -34,4 +34,4 @@ if ($result && $result->num_rows > 0) {
   ]);
 }
 
-$conn->close();
+$con->close();
