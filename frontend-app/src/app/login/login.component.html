@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container login-container">
   <div class="form-box">
-    <form (ngSubmit)="login()" #loginForm="ngForm">
-      <h2>Login</h2>
+    <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+      <h2 class="form-title">Login</h2>
 
       <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
       <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>
@@ -12,6 +12,8 @@
         [(ngModel)]="email"
         placeholder="Email"
         required
+        autocomplete="email"
+        class="form-input"
       />
 
       <input
@@ -20,13 +22,20 @@
         [(ngModel)]="password"
         placeholder="Password"
         required
+        autocomplete="current-password"
+        class="form-input"
       />
 
-      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+      <button type="submit" [disabled]="loginForm.invalid" class="btn-submit">
+        Login
+      </button>
 
-      <p><a routerLink="/forgot-password">Forgot Password?</a></p>
-      <p>Don't have an account?
-        <a routerLink="/register">Register</a>
+      <p class="form-footer">
+        <a routerLink="/forgot-password" class="link">Forgot Password?</a>
+      </p>
+      <p class="form-footer">
+        Don't have an account?
+        <a routerLink="/register" class="link">Register</a>
       </p>
     </form>
   </div>

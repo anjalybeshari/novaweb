@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container register-container">
   <div class="form-box">
-    <form (ngSubmit)="register()" #regForm="ngForm">
-      <h2>Register</h2>
+    <form (ngSubmit)="register()" #regForm="ngForm" novalidate>
+      <h2 class="form-title">Register</h2>
 
-      <p class="error-message"   *ngIf="errorMessage">{{ errorMessage }}</p>
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
       <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>
 
       <input
@@ -12,6 +12,8 @@
         [(ngModel)]="name"
         placeholder="Full Name"
         required
+        autocomplete="name"
+        class="form-input"
       />
 
       <input
@@ -20,6 +22,8 @@
         [(ngModel)]="email"
         placeholder="Email"
         required
+        autocomplete="email"
+        class="form-input"
       />
 
       <input
@@ -28,13 +32,21 @@
         [(ngModel)]="password"
         placeholder="Password"
         required
+        autocomplete="new-password"
+        class="form-input"
       />
 
-      <button type="submit" [disabled]="regForm.invalid">Register</button>
+      <button
+        type="submit"
+        [disabled]="regForm.invalid"
+        class="btn-submit"
+      >
+        Register
+      </button>
 
-      <p>
+      <p class="form-footer">
         Already have an account?
-        <a routerLink="/login">Login here</a>
+        <a routerLink="/login" class="link">Login here</a>
       </p>
     </form>
   </div>

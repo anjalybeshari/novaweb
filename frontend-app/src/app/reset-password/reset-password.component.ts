@@ -9,7 +9,9 @@ import { RouterLink }         from '@angular/router';
   selector: 'app-reset-password',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './reset-password.component.html'
+  templateUrl: './reset-password.component.html',
+   styleUrl: './reset-password.component.css',
+
 })
 export class ResetPasswordComponent implements OnInit {
   token = '';

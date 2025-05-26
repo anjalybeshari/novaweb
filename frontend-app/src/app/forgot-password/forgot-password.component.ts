@@ -13,7 +13,8 @@ interface ForgotPasswordResponse {
   selector: 'app-forgot-password',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './forgot-password.component.html'
+  templateUrl: './forgot-password.component.html',
+  styleUrl: './forgot-password.component.css'
 })
 export class ForgotPasswordComponent {
   email = '';
