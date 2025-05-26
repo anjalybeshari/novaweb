@@ -14,16 +14,16 @@ import { RouterModule } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   userName: string = '';
-  favorites: any[] = [];  // do t'i mbajmë këtu produktet e marra nga DB
+  favorites: any[] = [];  
 
   constructor(private cartService: CartService, private api: ApiService) {}
 
   ngOnInit(): void {
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const user = JSON.parse(storedUser);
-      this.userName = user.name;
-    }
+  if (storedUser) {
+    const user = JSON.parse(storedUser);
+    this.userName = user.name || user.user_name || ''; // Kontrollo saktësinë e fushës
+  }
 
     // Thirr API-n për të marrë 6 produkte nga DB
     this.api.getProducts(undefined, undefined, 6).subscribe({
@@ -35,6 +35,9 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+trackByProductId(index: number, item: any): number {
+  return item.product_id;
+}
 
   addToCart(productId: number): void {
     this.cartService.addToCart(productId).subscribe({

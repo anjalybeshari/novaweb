@@ -125,7 +125,21 @@ nav.navbar {
 }
 
 
+.welcome-text {
+  color: var(--first-color);
+  margin-right: 1rem;
+  font-weight: var(--font-semi-bold);
+  font-size: 1rem;
+  white-space: nowrap;
+}
 
+.logout-link {
+  color: var(--first-color);
+  font-weight: var(--font-semi-bold);
+  margin-left: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 
 @media (max-width: 768px) {

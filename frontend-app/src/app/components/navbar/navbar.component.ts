@@ -19,22 +19,29 @@ export class NavbarComponent {
   showCategories = false;
   categories: any[] = [];
 
+  userName: string = '';
+
   constructor(
     private api: ApiService,
     private router: Router,
-    @Optional() private route: ActivatedRoute  // <-- opsional
+    @Optional() private route: ActivatedRoute
   ) {
     this.loadCategories();
+    this.loadUserName();
 
     if (this.route) {
       this.route.queryParams.subscribe(params => {
-        if (params['showCategories'] === 'true') {
-          this.showCategories = true;
-          this.showSearch = false;
-        } else {
-          this.showCategories = false;
-        }
+        this.showCategories = params['showCategories'] === 'true';
+        if (this.showCategories) this.showSearch = false;
       });
+    }
+  }
+
+  loadUserName() {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      this.userName = user.name || user.user_name || '';
     }
   }
 
@@ -69,5 +76,11 @@ export class NavbarComponent {
       this.results = data;
       console.log("Search results:", data);
     });
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    this.userName = '';
+    this.router.navigate(['/login']);
   }
 }

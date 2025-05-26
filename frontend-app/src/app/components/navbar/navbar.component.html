@@ -5,12 +5,8 @@
 
       <a routerLink="/">Home</a>
 
-      <!-- Collection navigon në display-all -->
-      <a routerLink="/display-all" class="collections-link">
-        Collection
-      </a>
+      <a routerLink="/display-all" class="collections-link">Collection</a>
 
-      <!-- Categories si link ndarës me dropdown -->
       <div class="categories-container" style="position: relative; display: inline-block;">
         <a href="#" (click)="toggleCategories(); $event.preventDefault()" class="categories-link">
           Categories
@@ -25,7 +21,6 @@
         </div>
       </div>
 
-      <!-- Search toggle dhe form -->
       <span *ngIf="!showSearch" class="nav-link search-toggle" (click)="toggleSearch()" class="word">Search</span>
 
       <form *ngIf="showSearch" (ngSubmit)="submit()" class="search-bar">
@@ -43,10 +38,14 @@
   </div>
 
   <div class="nav-right">
+    <span *ngIf="userName" class="welcome-text">Welcome, {{ userName }}</span>
+
     <a routerLink="/cart">
       <span class="material-icons">shopping_cart</span>
     </a>
-    <a routerLink="/login">Log In</a>
-    <a routerLink="/register">Register</a>
+
+    <a *ngIf="!userName" routerLink="/login">Log In</a>
+    <a *ngIf="!userName" routerLink="/register">Register</a>
+    <a *ngIf="userName" (click)="logout()" class="logout-link" style="cursor:pointer;">Log Out</a>
   </div>
 </nav>
