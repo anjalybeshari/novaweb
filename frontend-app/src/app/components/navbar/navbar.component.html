@@ -2,33 +2,26 @@
   <div class="nav-main">
     <div class="logo">Nova</div>
     <div class="nav-left">
-      
       <a routerLink="/">Home</a>
       <a routerLink="/products">New Collection</a>
 
-      <!-- Toggle between Search text and input -->
-   <!-- Clickable "Search" text -->
-<span *ngIf="!showSearch" class="nav-link search-toggle" (click)="toggleSearch()" class="word">Search</span>
+      <span *ngIf="!showSearch" class="nav-link search-toggle" (click)="toggleSearch()">Search</span>
 
-<!-- Inline search bar with icon -->
-<form *ngIf="showSearch" (ngSubmit)="submit()" class="search-bar">
-  <span class="material-icons search-icon">search</span>
-  <input
-    id="navbar-search-input"
-    [(ngModel)]="query"
-    name="q"
-    type="text"
-    placeholder="Search..."
-  />
-</form>
-
+      <form *ngIf="showSearch" (ngSubmit)="submit()" class="search-bar">
+        <span class="material-icons search-icon">search</span>
+        <input
+          id="navbar-search-input"
+          [(ngModel)]="query"
+          name="q"
+          type="text"
+          placeholder="Search..."
+        />
+      </form>
     </div>
   </div>
 
   <div class="nav-right">
-    <a routerLink="/cart">
-      <span class="material-icons">shopping_cart</span>
-    </a>
+    <a routerLink="/cart"><span class="material-icons">shopping_cart</span></a>
     <a routerLink="/login">Log In</a>
     <a routerLink="/register">Register</a>
   </div>

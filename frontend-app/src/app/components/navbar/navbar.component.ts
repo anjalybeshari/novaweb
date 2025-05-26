@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -16,12 +16,11 @@ export class NavbarComponent {
   query = '';
   results: any[] = [];
 
-  constructor(private api: ApiService) {}
+    constructor(private api: ApiService, private router: Router) {}
 
   toggleSearch() {
     this.showSearch = true;
     this.query = '';
-
     setTimeout(() => {
       const inputElement = document.getElementById('navbar-search-input');
       inputElement?.focus();
@@ -29,9 +28,8 @@ export class NavbarComponent {
   }
 
   submit() {
-    this.api.search(this.query).subscribe(data => {
-      this.results = data;
-      console.log("Search results:", data);
-    });
+    if (!this.query.trim()) return;
+    this.router.navigate(['/search'], { queryParams: { q: this.query } });
   }
 }
+

@@ -37,6 +37,14 @@ export class ApiService {
   }
 
   search(q: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.base}/search.php`, { params: { q }, withCredentials: true });
-  }
+   return this.http.get<any[]>(`${this.base}/search.php`, {
+
+    params: { q },
+
+    withCredentials: true
+
+  });
+
+}
+
 }

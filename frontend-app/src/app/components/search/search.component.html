@@ -1,10 +1,20 @@
-<app-navbar></app-navbar>
-<div class="container">
-  <form (ngSubmit)="submit()">
-    <input [(ngModel)]="query" name="q" placeholder="Search products">
-    <button type="submit">Search</button>
-  </form>
-  <div class="results">
-    <div *ngFor="let p of results">{{ p.product_title }} — {{ p.product_price }}</div>
+
+<div class="container mt-5">
+  <h4>Rezultatet për "{{ query }}"</h4>
+
+  <div *ngIf="results.length === 0" class="text-muted mt-3">
+    Asnjë produkt nuk u gjet.
+  </div>
+
+  <div class="row mt-4" *ngIf="results.length > 0">
+    <div class="col-md-4 mb-4" *ngFor="let p of results">
+      <div class="card h-100 text-white bg-dark">
+        <img [src]="'/assets/img/' + p.product_image" class="card-img-top" alt="{{ p.product_title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ p.product_title }}</h5>
+          <p class="card-text">Çmimi: €{{ p.product_price }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,22 +1,29 @@
-import { Component }          from '@angular/core';
-import { ApiService }         from '../../services/api.service';
-import { CommonModule }       from '@angular/common';
-import { FormsModule }        from '@angular/forms';
-import { NavbarComponent }    from '../navbar/navbar.component';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-search',
-  standalone: true,
-  imports: [CommonModule, FormsModule, NavbarComponent],
-  templateUrl: './search.component.html'
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
   query = '';
   results: any[] = [];
 
-  constructor(private api: ApiService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private api: ApiService
+  ) {}
 
-  submit() {
-    this.api.search(this.query).subscribe(data => this.results = data);
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.query = params['q'] || '';
+      if (this.query.trim()) {
+        this.api.search(this.query).subscribe(res => {
+          this.results = res;
+        });
+      }
+    });
   }
 }

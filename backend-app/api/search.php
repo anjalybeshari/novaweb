@@ -6,14 +6,18 @@ header("Content-Type: application/json");
 
 require_once __DIR__ . '/../config/config.php';
 
-$q = $conn->real_escape_string($_GET['q'] ?? '');
-$res = $conn->query("
+$q = $con->real_escape_string($_GET['q'] ?? '');
+
+$res = $con->query("
   SELECT * 
     FROM products 
-   WHERE product_title LIKE '%{$q}%'
-      OR product_description LIKE '%{$q}%'
+   WHERE status = true
+     AND (product_title LIKE '%{$q}%' OR product_description LIKE '%{$q}%')
 ");
+
 $results = [];
-while ($r = $res->fetch_assoc()) $results[] = $r;
+while ($r = $res->fetch_assoc()) {
+  $results[] = $r;
+}
 
 echo json_encode($results);
