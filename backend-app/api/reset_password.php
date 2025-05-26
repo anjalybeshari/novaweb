@@ -26,7 +26,7 @@ if ($data['password'] !== $data['password_confirmation']) {
 
 $token_hash = hash("sha256", $data['token']);
 
-$stmt = $conn->prepare(
+$stmt = $con->prepare(
   "SELECT id, reset_token_expires_at
      FROM User
     WHERE reset_token_hash = ?"
@@ -48,7 +48,7 @@ if (strtotime($user['reset_token_expires_at']) < time()) {
 
 // Update password and clear token
 $newHash = password_hash($data['password'], PASSWORD_DEFAULT);
-$upd = $conn->prepare(
+$upd = $con->prepare(
   "UPDATE User
       SET password = ?, reset_token_hash = NULL, reset_token_expires_at = NULL
     WHERE id = ?"
