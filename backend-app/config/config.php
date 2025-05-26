@@ -1,9 +1,9 @@
 <?php
 // backend-app/includes/connect.php
 
-$host = "192.168.1.184";
-$user = "ani";
-$password = "ani_pw";
+$host = "localhost";
+$user = "root";
+$password = "Ani.0399";
 $database = "NOVA";
 $port = 3306;
 
