@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -19,8 +19,23 @@ export class NavbarComponent {
   showCategories = false;
   categories: any[] = [];
 
-  constructor(private api: ApiService, private router: Router) {
+  constructor(
+    private api: ApiService,
+    private router: Router,
+    @Optional() private route: ActivatedRoute  // <-- opsional
+  ) {
     this.loadCategories();
+
+    if (this.route) {
+      this.route.queryParams.subscribe(params => {
+        if (params['showCategories'] === 'true') {
+          this.showCategories = true;
+          this.showSearch = false;
+        } else {
+          this.showCategories = false;
+        }
+      });
+    }
   }
 
   loadCategories() {
@@ -31,14 +46,11 @@ export class NavbarComponent {
   }
 
   toggleCategories() {
-    this.showCategories = !this.showCategories;
+    this.router.navigate(['/display-all'], { queryParams: { showCategories: true } });
   }
 
   filterByCategory(categoryId: number) {
-    // Mbyll dropdown-in
     this.showCategories = false;
-
-    // Kalon tek faqja e produkteve me filtrin e kategorisë
     this.router.navigate(['/display-all'], { queryParams: { category: categoryId } });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api.service';
@@ -12,7 +12,7 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products: any[] = [];
+   @Input() products: any[] = [];
 
   constructor(
     private route: ActivatedRoute,

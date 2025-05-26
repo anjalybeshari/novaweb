@@ -2,26 +2,32 @@
   <div class="nav-main">
     <div class="logo">Nova</div>
     <div class="nav-left">
-      
+
       <a routerLink="/">Home</a>
 
-      <a routerLink="/display-all" (click)="toggleCategories()" class="collections-link">
+      <!-- Collection navigon në display-all -->
+      <a routerLink="/display-all" class="collections-link">
         Collection
       </a>
 
-      <!-- Dropdown për kategoritë -->
-      <div *ngIf="showCategories" class="categories-dropdown">
-        <ul>
-          <li *ngFor="let cat of categories" (click)="filterByCategory(cat.category_id)">
-            {{ cat.category_name }}
-          </li>
-        </ul>
+      <!-- Categories si link ndarës me dropdown -->
+      <div class="categories-container" style="position: relative; display: inline-block;">
+        <a href="#" (click)="toggleCategories(); $event.preventDefault()" class="categories-link">
+          Categories
+        </a>
+
+        <div *ngIf="showCategories" class="categories-dropdown">
+          <ul>
+            <li *ngFor="let cat of categories" (click)="filterByCategory(cat.id)">
+              {{ cat.name }}
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <!-- Toggle between Search text and input -->
+      <!-- Search toggle dhe form -->
       <span *ngIf="!showSearch" class="nav-link search-toggle" (click)="toggleSearch()" class="word">Search</span>
 
-      <!-- Inline search bar with icon -->
       <form *ngIf="showSearch" (ngSubmit)="submit()" class="search-bar">
         <span class="material-icons search-icon">search</span>
         <input

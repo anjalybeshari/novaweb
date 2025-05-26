@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CartService } from '../../services/cart.service';
 import { ApiService } from '../../services/api.service'; // importo shërbimin
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent,RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

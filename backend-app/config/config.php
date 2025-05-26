@@ -1,13 +1,13 @@
 <?php
 // backend-app/includes/connect.php
 
-$host = "192.168.1.184";
-$user = "ani";
-$password = "ani_pw";
+$host = "localhost";
+$user = "root";
+$password = "Ani.0399";
 $database = "NOVA";
-$port = 3306;
+//$port = 3306;
 
-$con = new mysqli($host, $user, $password, $database, $port);
+$con = new mysqli($host, $user, $password, $database);
 
 // Kontrollo gabimet pasi e ke inicializuar $con
 if ($con->connect_error) {
