@@ -122,12 +122,12 @@
 
   <div class="favorite__container container grid">
     <article class="favorite__card" *ngFor="let p of favorites">
-      <img [src]="'../../../assets/img/' + p.image" [alt]="p.title" class="favorite__img">
+      <img [src]="'/assets/img/' + p.product_image" [alt]="p.product_title" class="favorite__img">
 
       <div class="favorite__data">
-        <h2 class="favorite__title">{{ p.title }}</h2>
-        <span class="favorite__subtitle">{{ p.subtitle }}</span>
-        <h3 class="favorite__price">€{{ p.price }}</h3>
+        <h2 class="favorite__title">{{ p.product_title }}</h2>
+        <span class="favorite__subtitle">{{ p.product_description }}</span>
+        <h3 class="favorite__price">€{{ p.product_price }}</h3>
       </div>
 
       <button class="favorite__button button" (click)="addToCart(p.product_id)">
@@ -136,6 +136,7 @@
     </article>
   </div>
 </section>
+
 
 
 <!--====================   Na vizitoni ====================-->

@@ -79,6 +79,33 @@ nav.navbar {
   color: #cccccc;
   transform: translateY(-1px);
 }
+.categories-dropdown {
+  position: absolute;
+  background: var(--container-color);
+  box-shadow: 0 12px 24px hsla(0, 0%, 0%, .3);
+  margin-top: 0.5rem;
+  border-radius: 6px;
+  z-index: 1000;
+  padding: 0.5rem 0;
+}
+
+.categories-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories-dropdown li {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--first-color);
+  transition: background-color 0.3s;
+}
+
+.categories-dropdown li:hover {
+  background-color: var(--first-color-alt);
+  color: var(--black-color);
+}
 
 
 @media (max-width: 768px) {

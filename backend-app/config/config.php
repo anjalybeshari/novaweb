@@ -1,15 +1,16 @@
 <?php
 // backend-app/includes/connect.php
 
-$host = "localhost";
-$user = "root";
-$password = "Ani.0399";
+$host = "192.168.1.184";
+$user = "ani";
+$password = "ani_pw";
 $database = "NOVA";
+$port = 3306;
 
-// Përdorim $con në vend të $conn për konsistencë me funksionet
-$con = new mysqli($host, $user, $password, $database);
+$con = new mysqli($host, $user, $password, $database, $port);
 
+// Kontrollo gabimet pasi e ke inicializuar $con
 if ($con->connect_error) {
-    die('Connection failed: ' . $con->connect_error);
+    die(json_encode(['error' => "Connection failed: " . $con->connect_error]));
 }
 ?>

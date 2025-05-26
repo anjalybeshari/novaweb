@@ -6,7 +6,7 @@ header("Content-Type: application/json");
 
 require_once __DIR__ . '/../config/config.php';
 
-$res = $conn->query("SELECT category_id AS id, category_title AS name FROM categories");
+$res = $con->query("SELECT category_id AS id, category_title AS name FROM categories");
 $cats = [];
 while ($r = $res->fetch_assoc()) $cats[] = $r;
 

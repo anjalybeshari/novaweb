@@ -9,12 +9,15 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(category?: number, brand?: number): Observable<any[]> {
-    let params = new HttpParams();
-    if (category) params = params.set('category', category);
-    if (brand)    params = params.set('brand', brand);
-    return this.http.get<any[]>(`${this.base}/products.php`, { params, withCredentials: true });
-  }
+getProducts(category?: number, brand?: number, limit?: number): Observable<any[]> {
+  let params = new HttpParams();
+  if (category) params = params.set('category', category.toString());
+  if (brand)    params = params.set('brand', brand.toString());
+  if (limit)    params = params.set('limit', limit.toString());
+
+  return this.http.get<any[]>(`${this.base}/products.php`, { params, withCredentials: true });
+}
+
 
   getCategories(): Observable<any[]> {
     return this.http.get<any[]>(`${this.base}/categories.php`, { withCredentials: true });

@@ -10,19 +10,29 @@ require_once __DIR__ . '/../config/config.php';  // ku inicializohet $con ose $c
 // optional filters
 $category = $_GET['category'] ?? null;
 $brand    = $_GET['brand'] ?? null;
+$limit    = isset($_GET['limit']) ? intval($_GET['limit']) : null;
 
 $sql = "SELECT * FROM products";
-$conds = ["status = true"];
-if ($category) $conds[] = "category_id = " . intval($category);
-if ($brand)    $conds[] = "brand_id    = " . intval($brand);
+$conds = ["status = 'true'"];
+
+if ($category) {
+    $conds[] = "category_id = " . intval($category);
+}
+if ($brand) {
+    $conds[] = "brand_id = " . intval($brand);
+}
+
 $sql .= " WHERE " . implode(" AND ", $conds);
 
-// kujdes: përdor emrin e duhur të lidhjes
+if ($limit) {
+    $sql .= " LIMIT " . $limit;
+}
+
 $result = $con->query($sql);
 
 $products = [];
 while ($row = $result->fetch_assoc()) {
-  $products[] = $row;
+    $products[] = $row;
 }
 
 echo json_encode($products);

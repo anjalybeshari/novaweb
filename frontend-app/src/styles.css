@@ -410,12 +410,16 @@ img {
 }
 
 .favorite__img {
-  width: 120px;
+  width: 180px;       /* madhësia fikse e gjerësisë që ke në desktop */
+  height: 180px;      /* i barabartë me gjerësinë për kuti katrore */
+  object-fit: cover;  /* mbush kutinë, prerje pa deformim */
+  object-position: center; /* qendërto imazhin */
   position: absolute;
-  top: -2rem;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  top: -3rem;
+  left: 50%;           /* qendërto horizontalisht */
+  transform: translateX(-50%); /* zhvendos 50% për qendër të saktë */
+  border-radius: 0px;  /* opsionale: qoshe të rrumbullakosura */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* opsionale: hije pak */
 }
 
 .favorite__title {

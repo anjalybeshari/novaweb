@@ -4,23 +4,34 @@
     <div class="nav-left">
       
       <a routerLink="/">Home</a>
-      <a routerLink="/products">New Collection</a>
+
+      <a routerLink="/display-all" (click)="toggleCategories()" class="collections-link">
+        Collection
+      </a>
+
+      <!-- Dropdown për kategoritë -->
+      <div *ngIf="showCategories" class="categories-dropdown">
+        <ul>
+          <li *ngFor="let cat of categories" (click)="filterByCategory(cat.category_id)">
+            {{ cat.category_name }}
+          </li>
+        </ul>
+      </div>
 
       <!-- Toggle between Search text and input -->
-   <!-- Clickable "Search" text -->
-<span *ngIf="!showSearch" class="nav-link search-toggle" (click)="toggleSearch()" class="word">Search</span>
+      <span *ngIf="!showSearch" class="nav-link search-toggle" (click)="toggleSearch()" class="word">Search</span>
 
-<!-- Inline search bar with icon -->
-<form *ngIf="showSearch" (ngSubmit)="submit()" class="search-bar">
-  <span class="material-icons search-icon">search</span>
-  <input
-    id="navbar-search-input"
-    [(ngModel)]="query"
-    name="q"
-    type="text"
-    placeholder="Search..."
-  />
-</form>
+      <!-- Inline search bar with icon -->
+      <form *ngIf="showSearch" (ngSubmit)="submit()" class="search-bar">
+        <span class="material-icons search-icon">search</span>
+        <input
+          id="navbar-search-input"
+          [(ngModel)]="query"
+          name="q"
+          type="text"
+          placeholder="Search..."
+        />
+      </form>
 
     </div>
   </div>
