@@ -33,4 +33,21 @@ export class CartComponent implements OnInit {
         this.totalPrice = summary.totalPrice;
       });
   }
+
+  checkout() {
+  this.http.post<any>('http://localhost:8000/api/checkout.php', {}, { withCredentials: true })
+    .subscribe({
+      next: res => {
+        alert(`Porosia u bë me sukses! ID: ${res.order_id}`);
+        this.loadCart(); // Rifresko listën
+        this.loadSummary(); // Rifresko totalin
+      },
+      error: err => {
+        alert('Diçka shkoi keq gjatë përpunimit të porosisë.');
+        console.error(err);
+      }
+    });
+}
+
+
 }

@@ -19,4 +19,11 @@
     <p><strong>Total Items:</strong> {{ itemCount }}</p>
     <p><strong>Total Price:</strong> ${{ totalPrice }}</p>
   </div>
+
+  <div *ngIf="cartItems.length > 0" class="checkout-box">
+  <p>Total: {{ totalPrice | currency:'EUR' }}</p>
+  <button (click)="checkout()">Checkout</button>
+</div>
+
+
 </div>
