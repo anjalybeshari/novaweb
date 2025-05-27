@@ -41,31 +41,30 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-  this.loading = true;
-  this.errorMessage = null;
-
-  this.http.post<any>('http://localhost:8000/api/checkout.php', {}, { withCredentials: true })
-    .subscribe({
-      next: (res) => {
-        this.loading = false;
-        if (res.approve_link) {
-          // Ridrejto te PayPal për pagesë
-          window.location.href = res.approve_link;
-        } else {
-          this.errorMessage = 'Nuk u mor linku i pagesës PayPal.';
+    this.http
+      .post<any>('http://localhost:8000/api/checkout.php', {}, { withCredentials: true })
+      .subscribe({
+        next: res => {
+          alert(`Porosia u bë me sukses! ID: ${res.order_id}`);
+          this.loadCart();
+          this.loadSummary();
+        },
+        error: err => {
+          alert('Diçka shkoi keq gjatë përpunimit të porosisë.');
+          console.error(err);
         }
-      },
-      error: (err) => {
-        this.loading = false;
-        this.errorMessage = err.error?.error || 'Gabim gjatë checkout.';
-      }
-    });
-}
+      });
+  }
 
+  /** helper to build a valid image URL, encoding spaces etc */
   getImageUrl(filename: string): string {
     return `/assets/img/${encodeURIComponent(filename)}`;
   } 
 
-
-
+  /** optional error handler */
+  onImgError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    console.warn('Image load failed:', img.src);
+    img.src = 'assets/img/placeholder.png';
+  }
 }

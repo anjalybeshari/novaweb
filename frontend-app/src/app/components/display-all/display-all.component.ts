@@ -21,7 +21,7 @@ export class DisplayAllComponent implements OnInit {
   constructor(private api: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // Edhe nëse nuk shfaq më sidebar, e ruaj për përdorim të brendshëm (opsional)
+
     this.api.getCategories().subscribe(c => this.categories = c);
     this.api.getBrands().subscribe(b => this.brands = b);
 
