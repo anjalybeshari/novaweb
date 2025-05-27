@@ -28,7 +28,6 @@ export class NavbarComponent {
   ) {
     this.loadCategories();
     this.loadUserName();
-
     if (this.route) {
       this.route.queryParams.subscribe(params => {
         this.showCategories = params['showCategories'] === 'true';
@@ -64,18 +63,25 @@ export class NavbarComponent {
   toggleSearch() {
     this.showSearch = true;
     this.query = '';
-
+    this.results = [];
     setTimeout(() => {
-      const inputElement = document.getElementById('navbar-search-input');
-      inputElement?.focus();
+      document.getElementById('navbar-search-input')?.focus();
     }, 0);
   }
 
   submit() {
-    this.api.search(this.query).subscribe(data => {
-      this.results = data;
-      console.log("Search results:", data);
-    });
+  const term = this.query.trim();
+  if (!term) return;
+  this.showSearch = false;
+  this.router.navigate(['/search'], { queryParams: { q: term } });
+}
+
+
+  navigateToProduct(id: number) {
+    this.showSearch = false;
+    this.results = [];
+    this.query = '';
+    this.router.navigate(['/products', id]);
   }
 
   logout() {

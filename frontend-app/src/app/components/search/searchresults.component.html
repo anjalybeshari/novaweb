@@ -1,0 +1,8 @@
+
+  <app-navbar></app-navbar>
+  <div class="search-page">
+    <div class="result"></div>
+  <h2 class="text-center">Results for “{{ term }}”</h2>
+  <div *ngIf="!results.length">Nuk u gjet asnjë produkt.</div>
+  <app-products [products]="results"></app-products>
+</div>

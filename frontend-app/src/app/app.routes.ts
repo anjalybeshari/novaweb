@@ -7,7 +7,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CartComponent } from './components/cart/cart.component';
-import { SearchComponent } from './components/search/search.component';
+import { SearchResultsComponent } from './components/search/searchresults.component';
 import { DisplayAllComponent } from './components/display-all/display-all.component';
 
 export const routes: Routes = [
@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'cart',     component: CartComponent },
   { path: 'display-all', component: DisplayAllComponent },
-  { path: 'search',   component: SearchComponent },
+  { path: 'search',   component: SearchResultsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminPageComponent },

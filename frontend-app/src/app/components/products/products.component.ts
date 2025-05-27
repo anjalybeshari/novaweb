@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+// src/app/products/products.component.ts
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../services/api.service';
+import { RouterModule } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -11,27 +11,10 @@ import { CartService } from '../../services/cart.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
-   @Input() products: any[] = [];
+export class ProductsComponent {
+  @Input() products: any[] = [];
 
-  constructor(
-    private route: ActivatedRoute,
-    private api: ApiService,
-    private cartService: CartService
-  ) {}
-
-ngOnInit(): void {
-  this.api.getProducts().subscribe({
-    next: data => {
-      console.log('Produkte nga backend:', data);
-      this.products = data;
-    },
-    error: err => {
-      console.error('Gabim në marrjen e produkteve:', err);
-    }
-  });
-}
-
+  constructor(private cartService: CartService) {}
 
   addToCart(productId: number): void {
     this.cartService.addToCart(productId).subscribe({

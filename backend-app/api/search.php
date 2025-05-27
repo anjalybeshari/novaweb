@@ -3,11 +3,14 @@
 header("Access-Control-Allow-Origin: http://localhost:4200");
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
 
 require_once __DIR__ . '/../config/config.php';
 
-$q = $conn->real_escape_string($_GET['q'] ?? '');
-$res = $conn->query("
+$q = $con->real_escape_string($_GET['q'] ?? '');
+$res = $con->query("
   SELECT * 
     FROM products 
    WHERE product_title LIKE '%{$q}%'

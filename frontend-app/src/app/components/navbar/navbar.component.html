@@ -4,14 +4,12 @@
     <div class="nav-left">
 
       <a routerLink="/">Home</a>
-
       <a routerLink="/display-all" class="collections-link">Collection</a>
 
       <div class="categories-container" style="position: relative; display: inline-block;">
         <a href="#" (click)="toggleCategories(); $event.preventDefault()" class="categories-link">
           Categories
         </a>
-
         <div *ngIf="showCategories" class="categories-dropdown">
           <ul>
             <li *ngFor="let cat of categories" (click)="filterByCategory(cat.id)">
@@ -21,17 +19,41 @@
         </div>
       </div>
 
-      <span *ngIf="!showSearch" class="nav-link search-toggle" (click)="toggleSearch()" class="word">Search</span>
 
-      <form *ngIf="showSearch" (ngSubmit)="submit()" class="search-bar">
-        <span class="material-icons search-icon">search</span>
-        <input
-          id="navbar-search-input"
-          [(ngModel)]="query"
-          name="q"
-          type="text"
-          placeholder="Search..."
-        />
+     <span *ngIf="!showSearch" class="nav-link word" (click)="toggleSearch()">Search</span>
+
+    <form *ngIf="showSearch" (ngSubmit)="submit()" class="search-bar">
+      <input
+        id="navbar-search-input"
+        [(ngModel)]="query"
+        name="q"
+        type="text"
+        placeholder="Search..."
+        (keydown.enter)="submit()"
+      />
+      <button type="submit" style="display:none;"></button>
+
+        <!-- dropdown për rezultatet -->
+   <div *ngIf="results.length" class="search-results-dropdown">
+  <ul>
+    <li
+      *ngFor="let p of results"
+      (click)="navigateToProduct(p.product_id)"
+      class="search-result-item"
+    >
+      <img
+        [src]="'/assets/img/' + p.product_image"
+        alt="{{ p.product_title }}"
+        class="search-result-thumb"
+      />
+      <div class="search-result-info">
+        <div class="search-result-title">{{ p.product_title }}</div>
+        <div class="search-result-price">{{ p.product_price | currency:'USD' }}</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
       </form>
 
     </div>
@@ -39,11 +61,7 @@
 
   <div class="nav-right">
     <span *ngIf="userName" class="welcome-text">Welcome, {{ userName }}</span>
-
-    <a routerLink="/cart">
-      <span class="material-icons">shopping_cart</span>
-    </a>
-
+    <a routerLink="/cart"><span class="material-icons">shopping_cart</span></a>
     <a *ngIf="!userName" routerLink="/login">Log In</a>
     <a *ngIf="!userName" routerLink="/register">Register</a>
     <a *ngIf="userName" (click)="logout()" class="logout-link" style="cursor:pointer;">Log Out</a>
