@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,19 +16,22 @@ export class NavbarComponent {
   showSearch = false;
   query = '';
   results: any[] = [];
+  
 
   showCategories = false;
   categories: any[] = [];
-
+ cartCount = 0;
   userName: string = '';
 
   constructor(
     private api: ApiService,
     private router: Router,
+     private cartService: CartService,
     @Optional() private route: ActivatedRoute
   ) {
     this.loadCategories();
     this.loadUserName();
+      this.cartService.count$.subscribe(c => this.cartCount = c);
     if (this.route) {
       this.route.queryParams.subscribe(params => {
         this.showCategories = params['showCategories'] === 'true';

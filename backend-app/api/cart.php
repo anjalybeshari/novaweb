@@ -1,6 +1,7 @@
 <?php
 // api/cart.php
 header('Content-Type: application/json');
+
 require_once __DIR__ . '/../config/config.php'; 
 include '../functions/common_function.php';
 session_start();

@@ -52,10 +52,16 @@ export class CartComponent implements OnInit {
         }
       });
   }
+
+  /** helper to build a valid image URL, encoding spaces etc */
   getImageUrl(filename: string): string {
     return `/assets/img/${encodeURIComponent(filename)}`;
   }
 
-
-
+  /** optional error handler */
+  onImgError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    console.warn('Image load failed:', img.src);
+    img.src = 'assets/img/placeholder.png';
+  }
 }

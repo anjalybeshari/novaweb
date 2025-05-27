@@ -20,11 +20,9 @@ export class ProductsComponent {
     this.cartService.addToCart(productId).subscribe({
       next: res => {
         console.log('Shtuar në cart:', res);
-        alert('Produkti u shtua në cart!');
       },
       error: err => {
         console.error('Gabim gjatë shtimit:', err);
-        alert('Dështoi shtimi në cart.');
       }
     });
   }
