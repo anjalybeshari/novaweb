@@ -6,7 +6,7 @@
   </div>
 
   <div *ngFor="let item of cartItems" class="cart-item">
-    <img [src]="'http://localhost:8000/images/' + item.product_image1" width="100" />
+    <img [src]="'http://localhost:8000/images/' + item.product_image" width="100" />
     <div class="info">
       <h4>{{ item.product_title }}</h4>
       <p>Price: ${{ item.product_price }}</p>
