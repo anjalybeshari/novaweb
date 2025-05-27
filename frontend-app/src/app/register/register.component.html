@@ -3,9 +3,11 @@
     <form (ngSubmit)="register()" #regForm="ngForm" novalidate>
       <h2 class="form-title">Register</h2>
 
+      
       <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
       <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>
 
+      
       <input
         type="text"
         name="name"
@@ -15,17 +17,31 @@
         autocomplete="name"
         class="form-input"
       />
+      <div class="field-error" *ngIf="regForm.submitted && !name">
+        Emri është i detyrueshëm.
+      </div>
 
+      
       <input
         type="email"
         name="email"
         [(ngModel)]="email"
+        #emailModel="ngModel"
         placeholder="Email"
         required
-        autocomplete="email"
+        email
         class="form-input"
       />
+      <div class="field-error" *ngIf="emailModel.invalid && (emailModel.dirty || emailModel.touched)">
+        <div *ngIf="emailModel.errors?.['required']">
+          Email-i është i detyrueshëm.
+        </div>
+        <div *ngIf="emailModel.errors?.['email']">
+          Format i gabuar i email-it.
+        </div>
+      </div>
 
+    
       <input
         type="password"
         name="password"
@@ -35,7 +51,11 @@
         autocomplete="new-password"
         class="form-input"
       />
+      <div class="field-error" *ngIf="regForm.submitted && !password">
+        Fjalëkalimi është i detyrueshëm.
+      </div>
 
+      
       <button
         type="submit"
         [disabled]="regForm.invalid"

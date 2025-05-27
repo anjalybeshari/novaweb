@@ -3,7 +3,7 @@
 
 $host = "localhost";
 $user = "root";
-$password = "Ani.0399";
+$password = "Anja21/05/18";
 $database = "NOVA";
 //$port = 3306;
 
