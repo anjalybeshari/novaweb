@@ -15,6 +15,9 @@ export class CartComponent implements OnInit {
   itemCount = 0;
   totalPrice = 0;
 
+  loading: boolean = false;              // <--- Shto këtë
+  errorMessage: string | null = null;    // <--- Dhe këtë
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -38,23 +41,30 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-    this.http
-      .post<any>('http://localhost:8000/api/checkout.php', {}, { withCredentials: true })
-      .subscribe({
-        next: res => {
-          alert(`Porosia u bë me sukses! ID: ${res.order_id}`);
-          this.loadCart();
-          this.loadSummary();
-        },
-        error: err => {
-          alert('Diçka shkoi keq gjatë përpunimit të porosisë.');
-          console.error(err);
+  this.loading = true;
+  this.errorMessage = null;
+
+  this.http.post<any>('http://localhost:8000/api/checkout.php', {}, { withCredentials: true })
+    .subscribe({
+      next: (res) => {
+        this.loading = false;
+        if (res.approve_link) {
+          // Ridrejto te PayPal për pagesë
+          window.location.href = res.approve_link;
+        } else {
+          this.errorMessage = 'Nuk u mor linku i pagesës PayPal.';
         }
-      });
-  }
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = err.error?.error || 'Gabim gjatë checkout.';
+      }
+    });
+}
+
   getImageUrl(filename: string): string {
     return `/assets/img/${encodeURIComponent(filename)}`;
-  }
+  } 
 
 
 

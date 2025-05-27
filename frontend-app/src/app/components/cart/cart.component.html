@@ -25,10 +25,15 @@
     <p><strong>Total Price:</strong> ${{ totalPrice }}</p>
   </div>
 
-  <div *ngIf="cartItems.length > 0" class="checkout-box">
-  <p>Total: {{ totalPrice | currency:'EUR' }}</p>
-  <button (click)="checkout()">Checkout</button>
+    <div *ngIf="cartItems.length > 0" class="checkout-section">
+    <button (click)="checkout()" [disabled]="loading">
+      {{ loading ? 'Processing...' : 'Checkout with PayPal' }}
+    </button>
+  </div>
+
+  <!-- Mesazhi për gabime -->
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 </div>
 
 
-</div>
+

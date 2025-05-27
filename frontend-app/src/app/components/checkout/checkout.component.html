@@ -1,0 +1,9 @@
+<div class="checkout-container">
+  <h2>Checkout</h2>
+
+  <button (click)="checkout()" [disabled]="loading">
+    {{ loading ? 'Po përpilohet...' : 'Paguaj me PayPal' }}
+  </button>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</div>

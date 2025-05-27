@@ -9,6 +9,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { SearchResultsComponent } from './components/search/searchresults.component';
 import { DisplayAllComponent } from './components/display-all/display-all.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // redirect te /home në root
@@ -22,5 +23,7 @@ export const routes: Routes = [
   { path: 'admin', component: AdminPageComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: '**', redirectTo: '/home' } // fallback në rast rruge të panjohura
+  { path: '**', redirectTo: '/home' }, // fallback në rast rruge të panjohura
+  { path: 'checkout',     component: CheckoutComponent  }
+
 ];
