@@ -1,3 +1,4 @@
+// cart.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -11,8 +12,8 @@ import { CommonModule } from '@angular/common';
 })
 export class CartComponent implements OnInit {
   cartItems: any[] = [];
-  itemCount: number = 0;
-  totalPrice: number = 0;
+  itemCount = 0;
+  totalPrice = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -22,12 +23,14 @@ export class CartComponent implements OnInit {
   }
 
   loadCart(): void {
-    this.http.get<any[]>('http://localhost:8000/api/cart.php', { withCredentials: true })
-      .subscribe(res => this.cartItems = res);
+    this.http
+      .get<any[]>('http://localhost:8000/api/cart.php', { withCredentials: true })
+      .subscribe(res => (this.cartItems = res));
   }
 
   loadSummary(): void {
-    this.http.get<any>('http://localhost:8000/api/cart_summary.php', { withCredentials: true })
+    this.http
+      .get<any>('http://localhost:8000/api/cart_summary.php', { withCredentials: true })
       .subscribe(summary => {
         this.itemCount = summary.itemCount;
         this.totalPrice = summary.totalPrice;
@@ -35,19 +38,24 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-  this.http.post<any>('http://localhost:8000/api/checkout.php', {}, { withCredentials: true })
-    .subscribe({
-      next: res => {
-        alert(`Porosia u bë me sukses! ID: ${res.order_id}`);
-        this.loadCart(); // Rifresko listën
-        this.loadSummary(); // Rifresko totalin
-      },
-      error: err => {
-        alert('Diçka shkoi keq gjatë përpunimit të porosisë.');
-        console.error(err);
-      }
-    });
-}
+    this.http
+      .post<any>('http://localhost:8000/api/checkout.php', {}, { withCredentials: true })
+      .subscribe({
+        next: res => {
+          alert(`Porosia u bë me sukses! ID: ${res.order_id}`);
+          this.loadCart();
+          this.loadSummary();
+        },
+        error: err => {
+          alert('Diçka shkoi keq gjatë përpunimit të porosisë.');
+          console.error(err);
+        }
+      });
+  }
+  getImageUrl(filename: string): string {
+    return `/assets/img/${encodeURIComponent(filename)}`;
+  }
+
 
 
 }
